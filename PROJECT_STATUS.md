@@ -7,9 +7,9 @@
 | Field | Value |
 |---|---|
 | **Current Phase** | **Phase 0 — COMPLETE** (2026-07-11) |
-| **Current Task** | Phase 1 — T3B Local Mind Expansion — **complete** |
-| **Last Completed** | Phase 1 T1 (Ollama + local models), T2 (seam + Kernel Constitution), T3B (6 local capabilities, auto-routing, `jarvis_router.py`). **T3A (cloud frontier) archived by operator directive** — reference implementation kept in the seam (`frontier.primary`, status `archived-task-3a`) + `secrets.env` scaffold; activate later by adding a key and re-chaining. |
-| **Next Task** | Phase 1 T4 — chat UI on the Brain (Open WebUI via uv, tailnet-bound), then T5 (JARVIS pipe wraps `jarvis_router.py`), T6 (tablet), T7 (watchdog + offline finale) |
+| **Current Task** | Phase 1 — T4 UI adapter — machine-side **complete**; final step is operator opening it on the Tab S7+ |
+| **Last Completed** | T1, T2, T3B (local runtime, 6 capabilities, `jarvis_router.py`), T4 machine-side (Open WebUI 0.10.2 native via uv, JARVIS-branded, loopback+tailnet only, signup off, admin created, logon task reliable, UI-adapter secret relocated to Law 9 store). T3A archived. Doctrine skill created (`.claude/skills/jarvis-runtime-doctrine`). |
+| **Next Task** | T5 — expose the Runtime's single interface: one "JARVIS" endpoint backed by `jarvis_router.py` (OpenAI-compatible local shim per Convention 5), wired into the UI so raw model names never appear. Then T6 (operator: tablet), T7 (watchdog + offline finale). |
 | **Blocked By** | Nothing. |
 
 ## Completed Milestones
