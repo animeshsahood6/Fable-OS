@@ -4,17 +4,18 @@
 
 | Field | Value |
 |---|---|
-| **Current Phase** | Phase 0 — Foundation |
-| **Current Task** | T6 — Connect and secure — **in progress** (posture ✅, ADR-028 ✅, Tailscale on Brain ✅, validation 33/33 ✅) |
-| **Last Completed** | T5 — Found the system (2026-07-11) |
-| **Next Task** | T6 finish: operator enrolls Brain + tablet + phone into the tailnet → connectivity verified → Phase 0 closes |
-| **Blocked By** | **Operator action:** Tailscale login on the PC, and app install + login on the Tab S7+ and phone (same account on all three). |
+| **Current Phase** | **Phase 0 — COMPLETE** (2026-07-11) |
+| **Current Task** | Waiting for Phase 1 |
+| **Last Completed** | T6 — Connect and secure (2026-07-11): posture verified, ADR-028 ratified, tailnet operational (3 devices, direct paths), 33/33 validation, completion backup verified |
+| **Next Task** | **Phase 1 — Mind**: Ollama + local models (12 GB VRAM budget), kernel instructions file, one frontier direct adapter (ADR-027), `models.yaml` seam, watchdog, chat from the tablet |
+| **Blocked By** | Nothing. |
 
 ## Completed Milestones
 
 - **2026-07-09** — Founding corpus written; red-team review; ARCHITECTURE-V2.
 - **2026-07-10** — Pre-implementation architecture review (`reviews\2026-07-10-architecture-review.md`); ADR-009…024 ratified; architectural baseline complete.
 - **2026-07-11** — Phase 0 T1 complete (verified backup, full readiness report, Win11 eligibility confirmed). T2 complete (ADR-025 repo mapping, ADR-026 distributed consoles, ADR-027 gateway strategy).
+- **2026-07-11** — **PHASE 0 COMPLETE**, T1→T6 in one day: three repos founded with proven guards, tooling pinned, ADR-028 ratified, tailnet live across Brain + both consoles, 33/33 validation, verified completion backup.
 
 ## Phase 0 task board
 
@@ -25,7 +26,7 @@
 | T3 — Tooling (gitleaks, git identity, VERSIONS.md pins) | ✅ 2026-07-11 |
 | T4 — Author + rehearse `install\phase-0b.ps1` + `tests\phase-0.ps1` | ✅ 2026-07-11 (rehearsed on scratch root: full run, idempotent re-run, 33/33 checks, 3/3 guard canaries) |
 | T5 — Found the system (skeleton, repos, hooks, commits, survey) | ✅ 2026-07-11 (3 repos founded: docs `9ea7508`, config `ae87c26`, data `fbeac2b`; 33/33 checks; idempotency confirmed; `landing\` relocated to `projects\landing`) |
-| T6 — Connect and secure: posture check, ADR-028, tailnet, final validation (**Phase 0 exit**) | 🔶 in progress — awaiting console enrollment (operator) |
+| T6 — Connect and secure: posture check, ADR-028, tailnet, final validation (**Phase 0 exit**) | ✅ 2026-07-11 (tailnet: Brain 100.68.168.95 · tablet 100.98.100.58 · phone 100.91.162.27; no public exposure; 33/33 + 1 accepted PEND) |
 
 ## Known Issues
 
