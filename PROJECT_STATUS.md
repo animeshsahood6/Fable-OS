@@ -7,9 +7,9 @@
 | Field | Value |
 |---|---|
 | **Current Phase** | **Phase 0 — COMPLETE** (2026-07-11) |
-| **Current Task** | Phase 1 — T4 UI adapter — machine-side **complete**; final step is operator opening it on the Tab S7+ |
-| **Last Completed** | T1, T2, T3B (local runtime, 6 capabilities, `jarvis_router.py`), T4 machine-side (Open WebUI 0.10.2 native via uv, JARVIS-branded, loopback+tailnet only, signup off, admin created, logon task reliable, UI-adapter secret relocated to Law 9 store). T3A archived. Doctrine skill created (`.claude/skills/jarvis-runtime-doctrine`). |
-| **Next Task** | T5 — expose the Runtime's single interface: one "JARVIS" endpoint backed by `jarvis_router.py` (OpenAI-compatible local shim per Convention 5), wired into the UI so raw model names never appear. Then T6 (operator: tablet), T7 (watchdog + offline finale). |
+| **Current Task** | Phase 1 — T4+T5 machine-side **complete**; blocked on operator device interaction (tablet/phone) |
+| **Last Completed** | T1, T2, T3B, T4 (UI adapter), **T5** (single interface `jarvis_interface.py` on 127.0.0.1:11435 — one model "JARVIS", capability-routed, OpenAI-compatible streaming; UI rewired to consume only it, raw Ollama models hidden; interface logon task registered). Three Runtime tiers listening (Ollama 11434, interface 11435, UI 8080). Doctrine skill created. T3A archived. |
+| **Next Task** | **Operator (T6):** open JARVIS on the Tab S7+ and phone via the tailnet, confirm the only model shown is "JARVIS". **Then T7 (machine-side, mine):** watchdog + `tests\phase-1.ps1` + the offline finale (operator pulls the network while chatting). |
 | **Blocked By** | Nothing. |
 
 ## Completed Milestones

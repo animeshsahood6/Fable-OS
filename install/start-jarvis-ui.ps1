@@ -51,10 +51,16 @@ try {
 } catch { }
 
 # --- UI adapter configuration (environment; no upstream source modified) ----
+# Convention 5: the UI consumes the Runtime's ONE interface (jarvis_interface,
+# 127.0.0.1:11435) which exposes a single model "JARVIS". The raw Ollama models
+# are hidden so the operator never sees a model list.
 $env:DATA_DIR            = "D:\Fable OS\data\ui-adapter\open-webui"  # adapter cache tier
 $env:WEBUI_NAME          = "JARVIS"                 # branding where upstream permits
-$env:OLLAMA_BASE_URL     = "http://127.0.0.1:11434" # the local Runtime models
-$env:ENABLE_OPENAI_API   = "false"                  # no cloud path exists (T3B)
+$env:ENABLE_PERSISTENT_CONFIG = "false"             # env/files are authoritative each boot, not a DB
+$env:ENABLE_OLLAMA_API   = "false"                  # HIDE raw local models from the UI
+$env:ENABLE_OPENAI_API   = "true"                   # the one interface is OpenAI-compatible...
+$env:OPENAI_API_BASE_URL = "http://127.0.0.1:11435/v1"  # ...and entirely local (no Internet)
+$env:OPENAI_API_KEY      = "jarvis-local"           # dummy; the local shim ignores it
 $env:OFFLINE_MODE        = "true"                   # no update checks / phone-home
 $env:ENABLE_SIGNUP       = if ($FirstRun) { "true" } else { "false" }
 $env:DEFAULT_USER_ROLE   = "pending"                # anyone who slips past waits for admin
