@@ -7,9 +7,9 @@
 | Field | Value |
 |---|---|
 | **Current Phase** | **Phase 1 — COMPLETE** (2026-07-11) → entering **Phase 2 (Hands + Gateway)** |
-| **Current Task** | Phase 2 — **gateway evaluation** (ADR-027): Bifrost vs LiteLLM vs alternative against the L2 model-gateway role contract |
-| **Last Completed** | **Phase 1 COMPLETE** — offline finale passed on the Tab S7+ (JARVIS answered with the Internet disconnected; only JARVIS shown). Full local runtime: Ollama + 3 models, capability router, single JARVIS interface, UI adapter, watchdog, `tests\phase-1.ps1` green. |
-| **Next Task** | Evaluate the gateway (Bifrost preferred if it passes the role contract → else LiteLLM under ADR-017 controls → else superior alt), then stand it up **alongside** the working direct-Ollama path (MAINTENANCE §2 playbook), validate, and cut over the seam. |
+| **Current Task** | Phase 2 — gateway **chosen + validated alongside**; next is the router/interface **cutover** |
+| **Last Completed** | Gateway evaluation (ADR-027) done: Bifrost passed the role contract but **failed the thinking-control gate** (no clean think-off; empirically tested), so per ADR-027's fallback the gateway is **LiteLLM** (ADR-030), installed pinned under ADR-017 controls and **validated alongside** (routing works; `reasoning_effort:minimal`→237 tok clean, `high`→619 tok — thinking policy preserved; master-key auth on; 127.0.0.1 only). Working JARVIS untouched (still on direct-Ollama 11434). |
+| **Next Task** | **Cutover** (a focused pass): teach `jarvis_router.py` + `jarvis_interface.py` to call the gateway (`localhost:4000/v1`, Bearer master key, `think`→`reasoning_effort` map), repoint `models.yaml` providers, keep the direct-Ollama path as rollback, re-run `tests\phase-1.ps1`, register the gateway logon task. Design note to settle first: interface→router→gateway call topology + streaming. |
 | **Blocked By** | Nothing. |
 
 ## Completed Milestones
