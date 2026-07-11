@@ -16,6 +16,7 @@
 | Ollama | 0.31.2 | winget (installer hash verified by winget) | Phase 1 T1 |
 | Local model — general | qwen3.5:9b (Apache-2.0) | ollama pull (sha256-verified by ollama) | Phase 1 T1 |
 | Local model — fast | qwen3.5:0.8b (Apache-2.0) | ollama pull (sha256-verified by ollama) | Phase 1 T1 |
+| Local model — coding | qwen3-coder:30b (MoE 30B-A3B, Apache-2.0) | ollama pull (sha256-verified by ollama) | Phase 1 T3B |
 
 ## Forward pins & notations (obligations inherited by later phases)
 

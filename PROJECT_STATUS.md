@@ -7,9 +7,9 @@
 | Field | Value |
 |---|---|
 | **Current Phase** | **Phase 0 — COMPLETE** (2026-07-11) |
-| **Current Task** | Waiting for Phase 1 |
-| **Last Completed** | T6 — Connect and secure (2026-07-11): posture verified, ADR-028 ratified, tailnet operational (3 devices, direct paths), 33/33 validation, completion backup verified |
-| **Next Task** | **Phase 1 — Mind**: Ollama + local models (12 GB VRAM budget), kernel instructions file, one frontier direct adapter (ADR-027), `models.yaml` seam, watchdog, chat from the tablet |
+| **Current Task** | Phase 1 — T3B Local Mind Expansion — **complete** |
+| **Last Completed** | Phase 1 T1 (Ollama + local models), T2 (seam + Kernel Constitution), T3B (6 local capabilities, auto-routing, `jarvis_router.py`). **T3A (cloud frontier) archived by operator directive** — reference implementation kept in the seam (`frontier.primary`, status `archived-task-3a`) + `secrets.env` scaffold; activate later by adding a key and re-chaining. |
+| **Next Task** | Phase 1 T4 — chat UI on the Brain (Open WebUI via uv, tailnet-bound), then T5 (JARVIS pipe wraps `jarvis_router.py`), T6 (tablet), T7 (watchdog + offline finale) |
 | **Blocked By** | Nothing. |
 
 ## Completed Milestones
