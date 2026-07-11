@@ -13,6 +13,9 @@
 | uv | 0.11.28 (2026-07-07 build) — pre-1.0: treat upgrades as breaking until proven otherwise (ADR-014) | pre-existing | T3 |
 | gitleaks | 8.30.1 | winget (installer hash verified by winget) | T3 |
 | Tailscale (Brain) | 1.98.8 | winget (installer hash verified by winget) | T6 |
+| Ollama | 0.31.2 | winget (installer hash verified by winget) | Phase 1 T1 |
+| Local model — general | qwen3.5:9b (Apache-2.0) | ollama pull (sha256-verified by ollama) | Phase 1 T1 |
+| Local model — fast | qwen3.5:0.8b (Apache-2.0) | ollama pull (sha256-verified by ollama) | Phase 1 T1 |
 
 ## Forward pins & notations (obligations inherited by later phases)
 
@@ -20,7 +23,7 @@
 |---|---|---|
 | infra (ADR-028) | Windows 11 | Deferred with hard ceiling 2026-10-01 / pre-Phase 6; record edition + build here at upgrade; ESU patch-pulse checked quarterly |
 | 0 (T6) | Tailscale consoles | Record tablet + phone client versions when enrolled (ADR-026); successor: plain WireGuard |
-| 1 | Ollama + models | Pin Ollama version and exact model tags (sized to 12 GB VRAM per T1 survey) at install |
+| 1 | ~~Ollama + models~~ | Done — pinned above (Phase 1 T1) |
 | 1 | Frontier direct adapter | Record provider + API version; **marked for deletion at Phase 2** (ADR-027) |
 | 2 | Gateway | Evaluation order Bifrost → LiteLLM (≥1.83.10 + ADR-017 controls) → superior alternative (ADR-027); pin winner here |
 | 2 | MCP spec | Target **2026-07-28**; pin in `config\mcp.json`; no deprecated sampling/logging (ADR-019) |
