@@ -18,6 +18,11 @@
 | Local model — fast | qwen3.5:0.8b (Apache-2.0) | ollama pull (sha256-verified by ollama) | Phase 1 T1 |
 | Local model — coding | qwen3-coder:30b (MoE 30B-A3B, Apache-2.0) | ollama pull (sha256-verified by ollama) | Phase 1 T3B |
 | UI adapter | open-webui 0.10.2 (uv tool, native — no Docker) | uv tool install | Phase 1 T4 |
+| Model gateway | litellm[proxy] 1.91.1 (uv tool, ADR-017 controls) | uv tool install (pinned) | Phase 2 (ADR-030) |
+| Voice STT | realtimestt 1.0.2 + faster-whisper 1.2.1 + ctranslate2 4.8.1 (+ torch 2.13.0 CPU for VAD) | uv venv `config\voice\.venv` | Voice (ADR-022) |
+| Voice wake word | openwakeword 0.6.0 (pretrained `hey_jarvis`, offline, keyless) | uv pip (voice venv) | Voice (ADR-022) |
+| Voice TTS | kokoro-onnx 0.5.0 + onnxruntime 1.27.0 (Kokoro-82M, Apache-2.0) | uv pip + model files under `config\voice\models\` | Voice (ADR-022) |
+| Voice audio I/O | sounddevice 0.5.5 + soundfile 0.13.1 | uv pip (voice venv) | Voice (ADR-022) |
 
 ## Forward pins & notations (obligations inherited by later phases)
 

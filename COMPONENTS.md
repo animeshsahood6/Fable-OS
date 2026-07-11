@@ -39,8 +39,9 @@ Choices reflect the ecosystem as of **mid-2026**. Any future agent should re-ver
 | Social media | **Postiz** (open-source scheduler) via its API/MCP | One integration point for many platforms | Per-platform MCP servers | Medium — platform APIs churn; expect this row to change often |
 | Image generation | **ComfyUI** | The open-source standard; runs SD/Flux-class models offline; also does video | InvokeAI, Fooocus; cloud APIs via gateway for quality peaks | Low |
 | Video generation | **ComfyUI** (Wan/LTX/Hunyuan-class models) | Same install as image gen | Cloud video APIs | Low |
-| Speech-to-text | **faster-whisper** | Best offline accuracy/speed | whisper.cpp, Vosk | Low |
-| Text-to-speech | **Piper** | Fast, offline, tiny | Kokoro, XTTS (higher quality, heavier) | Low |
+| Speech-to-text | **RealtimeSTT** (wraps faster-whisper + Silero/WebRTC VAD) | Streaming STT + VAD + wake-word gating in one Windows-native component (ADR-022) | whisper.cpp, Vosk (faster-whisper is the engine underneath) | Low |
+| Wake word | **openWakeWord** (`hey_jarvis` pretrained) | Free, fully offline, no key (Law 6) | Porcupine (higher quality, needs a Picovoice key) | Low — config edit |
+| Text-to-speech | **kokoro-onnx** (Kokoro-82M, Apache-2.0, onnxruntime — no torch) | ADR-022 chose Kokoro over Piper (quality; no torch); streaming synth | piper1-gpl (GPL-3; original Piper archived), XTTS | Low |
 | Scheduler | **Windows Task Scheduler** | Ships with the OS (Law 10) | none needed | — |
 | Secrets | **Windows Credential Manager** + git-ignored `config\secrets.env` | Ships with the OS | KeePassXC | Low |
 | Project management | **Markdown task files** in `projects\` maintained by the kernel | Files first (Law 1) | Vikunja/Focalboard if a UI is ever truly needed | Low |

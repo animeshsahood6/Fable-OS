@@ -7,9 +7,9 @@
 | Field | Value |
 |---|---|
 | **Current Phase** | **Phase 1 — COMPLETE** (2026-07-11) → entering **Phase 2 (Hands + Gateway)** |
-| **Current Task** | Phase 2 — model gateway **integrated** (cutover complete & validated); next: MCP capabilities (Hands) |
-| **Last Completed** | Gateway cutover: `models.yaml` providers repointed to the LiteLLM gateway (`127.0.0.1:4000/v1`), `jarvis_router.py` + `jarvis_interface.py` now call it (Bearer master key from Law 9 store; `think`→`reasoning_effort` map); Ollama-native path retained for one-line rollback. Full chain UI→interface→gateway→Ollama validated (chat, coding auto-route, streaming, offline). Gateway added to the watchdog + given a logon task. `tests\phase-1.ps1` green. Four scheduled tasks (Gateway, Interface, UI, Watchdog). |
-| **Next Task** | Phase 2 continues — the "Hands": `config\mcp.json` against the 2026-07-28 MCP spec (ADR-019) with filesystem + browser MCP servers, vetted/pinned (ADR-018); then READER/ACTOR profiles + ACTOR sandbox (ADR-009/020), the injection canary suite (ADR-013), the successor-kernel parity job (ADR-010), and GLOSSARY.md. |
+| **Current Task** | **Priority 1 — Voice Runtime (ADR-022): headless-validated;** live spoken test is the operator's (physical mic/speaker) |
+| **Last Completed** | Voice adapter built (`config\kernel\jarvis_voice.py`, ≤200-line glue): openWakeWord `hey_jarvis` + RealtimeSTT → the JARVIS interface (11435) → kokoro-onnx TTS (British `bm_george`) → sounddevice, with barge-in, ambient/idle-timeout, all config-driven (`config\voice.yaml`). Local-only, providers replaceable (Law 4). **Headless suite (`tests\voice.ps1`) green**: TTS↔STT roundtrip exact, wake word loads, audio devices present, interface→TTS glue works. Runtime baseline (gateway/interface/UI/Ollama) untouched. Prior: Phase 0/1 complete, gateway integrated (ADR-030). |
+| **Next Task** | **Operator:** live spoken test — run `install\start-jarvis-voice.ps1`, say "hey jarvis", confirm it hears, replies aloud, and can be interrupted. Then (my side) register the voice logon task if desired, and proceed to Priority 2 (Glass Overlay, an L5 interface per ADR-029). Priority 5 (MCP) stays paused under ADR-019. |
 | **Blocked By** | Nothing. |
 
 ## Completed Milestones
