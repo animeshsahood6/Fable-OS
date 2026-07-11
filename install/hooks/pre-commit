@@ -12,6 +12,15 @@
 # EXPECTED RUNTIME: under 2 seconds.
 # ============================================================================
 
+# Shells opened before the T3 install carry a stale PATH; check WinGet's
+# well-known links directory before failing (fail-closed either way).
+# Note: $LOCALAPPDATA is a Windows path (C:\...) whose colon would break the
+# POSIX PATH list - convert it with cygpath (ships with Git for Windows).
+if ! command -v gitleaks >/dev/null 2>&1 && command -v cygpath >/dev/null 2>&1; then
+  PATH="$PATH:$(cygpath -u "$LOCALAPPDATA")/Microsoft/WinGet/Links"
+  export PATH
+fi
+
 if ! command -v gitleaks >/dev/null 2>&1; then
   echo ""
   echo "COMMIT BLOCKED - the secret scanner (gitleaks) is not available."

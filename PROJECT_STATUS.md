@@ -5,9 +5,9 @@
 | Field | Value |
 |---|---|
 | **Current Phase** | Phase 0 — Foundation |
-| **Current Task** | T4 — Foundation scripts authored + rehearsed — **complete** |
-| **Last Completed** | T3 — Foundation tooling (2026-07-11): git configured, gitleaks 8.30.1 installed + detection-tested, VERSIONS.md baseline pinned |
-| **Next Task** | T5 — Found the system: run `install\phase-0b.ps1` against the real root |
+| **Current Task** | T5 — Found the system — **complete** |
+| **Last Completed** | T4 — Foundation scripts authored + rehearsed (2026-07-11) |
+| **Next Task** | T6 — Windows 11 upgrade + tailnet + revalidation (**Phase 0 exit gate**) |
 | **Blocked By** | Nothing. |
 
 ## Completed Milestones
@@ -24,8 +24,8 @@
 | T2 — ADR-025/026/027 + status page | ✅ 2026-07-11 |
 | T3 — Tooling (gitleaks, git identity, VERSIONS.md pins) | ✅ 2026-07-11 |
 | T4 — Author + rehearse `install\phase-0b.ps1` + `tests\phase-0.ps1` | ✅ 2026-07-11 (rehearsed on scratch root: full run, idempotent re-run, 33/33 checks, 3/3 guard canaries) |
-| T5 — Found the system (skeleton, repos, hooks, commits, survey) | ⬜ next |
-| T6 — Windows 11 upgrade + tailnet + revalidation (**Phase 0 exit gate**) | ⬜ |
+| T5 — Found the system (skeleton, repos, hooks, commits, survey) | ✅ 2026-07-11 (3 repos founded: docs `9ea7508`, config `ae87c26`, data `fbeac2b`; 33/33 checks; idempotency confirmed; `landing\` relocated to `projects\landing`) |
+| T6 — Windows 11 upgrade + tailnet + revalidation (**Phase 0 exit gate**) | ⬜ next |
 
 ## Known Issues
 
@@ -33,6 +33,7 @@
 2. **`landing\` project in corpus root** — relocates to `projects\landing\` at T5 (ADR-025 §5).
 3. **Windows 10 Pro N is past end-of-support** (since 2025-10-14) — closed by T6; machine confirmed eligible on every axis.
 4. **No dedicated backup drive** — D: is itself the (likely external) ORICO SSD; baseline lives cross-disk on C:. Acquire one backup drive before Phase 3 (restic offsite is mandatory then, ADR-011).
+5. **D: is exFAT** (discovered at T5) — no ownership records or NTFS ACLs. `git safe.directory` exceptions added for `D:/Fable OS` and children (baked into phase-0b.ps1 for DR). Consequence for Phase 2: ADR-020's ACTOR filesystem scoping cannot rely on NTFS ACLs *on D:* — enforce scope via the Agent Workspace / account boundary instead.
 
 ## Standing references
 
