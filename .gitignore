@@ -8,3 +8,7 @@ projects/
 **/__pycache__/
 **/.cache/
 Thumbs.db
+
+# Secrets a UI adapter may drop in cwd (Law 9) - key belongs in config\secrets.env
+.webui_secret_key
+*.secret_key
