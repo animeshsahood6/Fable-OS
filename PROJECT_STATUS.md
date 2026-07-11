@@ -6,10 +6,10 @@
 
 | Field | Value |
 |---|---|
-| **Current Phase** | **Phase 0 — COMPLETE** (2026-07-11) |
-| **Current Task** | Phase 1 — **machine-side COMPLETE and validated** (`tests\phase-1.ps1` all green); only the operator offline-finale remains |
-| **Last Completed** | T1, T2, T3B, T4 (UI adapter), T5 (single JARVIS interface), **T6 confirmed by operator** (JARVIS default on tablet + phone over tailnet), **T7 machine-side** (watchdog every ~3h + `tests\phase-1.ps1`; Arena Model disabled so only JARVIS shows). Three tiers + three logon/periodic scheduled tasks. Doctrine skill live. T3A archived. |
-| **Next Task** | **Operator:** the offline finale — chat with JARVIS on the tablet, disconnect the Internet, confirm it keeps answering (structurally already proven; this is the human demonstration). Then Phase 1 closes and Phase 2 (gateway) begins. |
+| **Current Phase** | **Phase 1 — COMPLETE** (2026-07-11) → entering **Phase 2 (Hands + Gateway)** |
+| **Current Task** | Phase 2 — **gateway evaluation** (ADR-027): Bifrost vs LiteLLM vs alternative against the L2 model-gateway role contract |
+| **Last Completed** | **Phase 1 COMPLETE** — offline finale passed on the Tab S7+ (JARVIS answered with the Internet disconnected; only JARVIS shown). Full local runtime: Ollama + 3 models, capability router, single JARVIS interface, UI adapter, watchdog, `tests\phase-1.ps1` green. |
+| **Next Task** | Evaluate the gateway (Bifrost preferred if it passes the role contract → else LiteLLM under ADR-017 controls → else superior alt), then stand it up **alongside** the working direct-Ollama path (MAINTENANCE §2 playbook), validate, and cut over the seam. |
 | **Blocked By** | Nothing. |
 
 ## Completed Milestones
@@ -18,6 +18,7 @@
 - **2026-07-10** — Pre-implementation architecture review (`reviews\2026-07-10-architecture-review.md`); ADR-009…024 ratified; architectural baseline complete.
 - **2026-07-11** — Phase 0 T1 complete (verified backup, full readiness report, Win11 eligibility confirmed). T2 complete (ADR-025 repo mapping, ADR-026 distributed consoles, ADR-027 gateway strategy).
 - **2026-07-11** — **PHASE 0 COMPLETE**, T1→T6 in one day: three repos founded with proven guards, tooling pinned, ADR-028 ratified, tailnet live across Brain + both consoles, 33/33 validation, verified completion backup.
+- **2026-07-11** — **PHASE 1 COMPLETE** (local-first path): Ollama + qwen3.5 9b/0.8b + qwen3-coder:30b; capability router; single JARVIS interface (one model, auto-routed, streaming); Open WebUI adapter (JARVIS-branded, tailnet-only, arena hidden); watchdog + `tests\phase-1.ps1` green; offline finale passed on the tablet. Doctrine skill created. T3A (cloud) archived for later activation.
 
 ## Phase 0 task board
 

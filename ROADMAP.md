@@ -24,13 +24,13 @@ Give the system a versioned home and the basic tools.
 
 One gateway, cloud + local models behind it, a chat window.
 
-- [ ] Ollama installed; one general + one small model pulled (sized to hardware)
-- [ ] LiteLLM proxy installed; `config\models.yaml` created with task-routes (`reasoning`, `fast`, `embedding`, `offline`) and fallback chains ending local
-- [ ] API keys for available cloud providers stored per Law 9
-- [ ] Open WebUI installed, pointed at the gateway
-- [ ] Gateway start registered as a logon task (Task Scheduler)
+- [x] Ollama installed; general + small + coding models pulled (sized to 12 GB VRAM)
+- [~] `config\models.yaml` created with capability routes + local fallback chains — **gateway software (LiteLLM/Bifrost) deferred to Phase 2 per ADR-027** (seam binding from Day 1; software later)
+- [~] Cloud API keys — **Task 3A archived** (local-first chosen); Law 9 scaffold ready to activate later
+- [x] Open WebUI installed, pointed at the Runtime's single interface (JARVIS)
+- [x] Interface + UI start registered as logon tasks (Task Scheduler)
 
-**Done when:** you can chat in Open WebUI with a cloud model, then **unplug the network and still get answers** from the local model.
+**Done when:** ~~chat with a cloud model~~ → **[COMPLETE 2026-07-11]** chat with JARVIS in the UI, then **unplug the network and still get answers** from the local model. *Offline finale passed on the Tab S7+.* Revised local-first path recorded in [PROJECT_STATUS.md](PROJECT_STATUS.md), ADR-027, and the 2026-07-11 journal.
 
 ## Phase 2 — Hands
 
