@@ -1,5 +1,7 @@
 # PROJECT_STATUS — JarvisOS
 
+**Product:** JARVIS Runtime · **Project:** JarvisOS ([ADR-029](decisions/ADR-029.md) — architecture frozen; implementation only from here)
+
 > The single project status page. Living document (ADR-016 tier: operational registry). Updated in the same session as any status change (Law 8). One glance answers: where are we, what's next, what's in the way.
 
 | Field | Value |
