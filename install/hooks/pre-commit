@@ -13,11 +13,16 @@
 # ============================================================================
 
 # Shells opened before the T3 install carry a stale PATH; check WinGet's
-# well-known links directory before failing (fail-closed either way).
+# install locations before failing (fail-closed either way). gitleaks is a
+# portable winget package: its exe lives in WinGet/Packages/Gitleaks.Gitleaks_*.
 # Note: $LOCALAPPDATA is a Windows path (C:\...) whose colon would break the
 # POSIX PATH list - convert it with cygpath (ships with Git for Windows).
 if ! command -v gitleaks >/dev/null 2>&1 && command -v cygpath >/dev/null 2>&1; then
-  PATH="$PATH:$(cygpath -u "$LOCALAPPDATA")/Microsoft/WinGet/Links"
+  wg="$(cygpath -u "$LOCALAPPDATA")/Microsoft/WinGet"
+  PATH="$PATH:$wg/Links"
+  for d in "$wg"/Packages/Gitleaks.Gitleaks_*; do
+    [ -d "$d" ] && PATH="$PATH:$d"
+  done
   export PATH
 fi
 
