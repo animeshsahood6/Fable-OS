@@ -1,0 +1,28 @@
+#!/bin/sh
+# ============================================================================
+# JarvisOS pre-push hook (all repos, via core.hooksPath)
+# PURPOSE      : fableos-data must NEVER reach any remote (ADR-011 / ADR-025:
+#                personal memory and journals never leave the machine
+#                unencrypted; their only offsite path is restic, Phase 3).
+# SCOPE        : Runs automatically on every `git push` in fableos repos.
+# WHAT IT DOES : Refuses the push if the repository is fableos-data.
+# WHAT IT NEVER DOES: Never blocks docs/config/project pushes.
+# PREREQUISITES: none.
+# IDEMPOTENCY  : Read-only; no state.
+# ROLLBACK     : None needed.
+# EXPECTED RUNTIME: instant.
+# ============================================================================
+
+top=$(git rev-parse --show-toplevel 2>/dev/null)
+case "$top" in
+  */data|*/Data)
+    echo ""
+    echo "PUSH BLOCKED - this is the fableos-data repository (memory + journals)."
+    echo "Why  : your personal data never leaves this machine unencrypted"
+    echo "       (ADR-011). Its only offsite path is the encrypted restic"
+    echo "       backup, which Phase 3 sets up."
+    echo "Fix  : nothing to fix - this block is working as designed."
+    exit 1
+    ;;
+esac
+exit 0

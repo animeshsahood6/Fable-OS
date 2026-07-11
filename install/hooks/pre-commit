@@ -1,0 +1,37 @@
+#!/bin/sh
+# ============================================================================
+# JarvisOS pre-commit hook (all repos, via core.hooksPath)
+# PURPOSE      : Block any commit containing a secret (Law 9, ADR-018).
+# SCOPE        : Runs automatically on every `git commit` in fableos repos.
+# WHAT IT DOES : Scans exactly the staged changes with gitleaks.
+# WHAT IT NEVER DOES: Never modifies files, never sends anything anywhere.
+# PREREQUISITES: gitleaks on PATH (installed at T3).
+# IDEMPOTENCY  : Read-only; no state.
+# ROLLBACK     : None needed. Emergency bypass exists in git itself
+#                (--no-verify) but using it defeats Law 9 - do not.
+# EXPECTED RUNTIME: under 2 seconds.
+# ============================================================================
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo ""
+  echo "COMMIT BLOCKED - the secret scanner (gitleaks) is not available."
+  echo "Why  : Law 9 requires every commit to be scanned; without the scanner"
+  echo "       a secret could slip into permanent git history."
+  echo "Fix  : winget install --id Gitleaks.Gitleaks -e"
+  echo "       then open a NEW terminal and retry the commit."
+  exit 1
+fi
+
+gitleaks git --pre-commit --staged --redact --no-banner
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "COMMIT BLOCKED - gitleaks found something that looks like a secret"
+  echo "in the files you are committing (details above, value redacted)."
+  echo "Why  : secrets in git history are permanent (Law 9)."
+  echo "Fix  : remove the secret from the file, store it per Law 9"
+  echo "       (Windows Credential Manager or config\\secrets.env), list its"
+  echo "       NAME in config\\vault\\SECRETS-INVENTORY.md, then commit again."
+  echo "False alarm? Paste the gitleaks output to your AI assistant."
+  exit 1
+fi
+exit 0

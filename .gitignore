@@ -1,0 +1,10 @@
+# Nested repositories (ADR-025) - each versions itself; invisible to the docs repo
+config/
+data/
+projects/
+
+# Caches and junk (Law 1: only sources of truth get versioned)
+**/node_modules/
+**/__pycache__/
+**/.cache/
+Thumbs.db
