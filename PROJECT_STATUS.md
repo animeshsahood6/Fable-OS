@@ -5,10 +5,10 @@
 | Field | Value |
 |---|---|
 | **Current Phase** | Phase 0 — Foundation |
-| **Current Task** | T5 — Found the system — **complete** |
-| **Last Completed** | T4 — Foundation scripts authored + rehearsed (2026-07-11) |
-| **Next Task** | T6 — Windows 11 upgrade + tailnet + revalidation (**Phase 0 exit gate**) |
-| **Blocked By** | Nothing. |
+| **Current Task** | T6 — Connect and secure — **in progress** (posture ✅, ADR-028 ✅, Tailscale on Brain ✅, validation 33/33 ✅) |
+| **Last Completed** | T5 — Found the system (2026-07-11) |
+| **Next Task** | T6 finish: operator enrolls Brain + tablet + phone into the tailnet → connectivity verified → Phase 0 closes |
+| **Blocked By** | **Operator action:** Tailscale login on the PC, and app install + login on the Tab S7+ and phone (same account on all three). |
 
 ## Completed Milestones
 
@@ -25,15 +25,17 @@
 | T3 — Tooling (gitleaks, git identity, VERSIONS.md pins) | ✅ 2026-07-11 |
 | T4 — Author + rehearse `install\phase-0b.ps1` + `tests\phase-0.ps1` | ✅ 2026-07-11 (rehearsed on scratch root: full run, idempotent re-run, 33/33 checks, 3/3 guard canaries) |
 | T5 — Found the system (skeleton, repos, hooks, commits, survey) | ✅ 2026-07-11 (3 repos founded: docs `9ea7508`, config `ae87c26`, data `fbeac2b`; 33/33 checks; idempotency confirmed; `landing\` relocated to `projects\landing`) |
-| T6 — Windows 11 upgrade + tailnet + revalidation (**Phase 0 exit gate**) | ⬜ next |
+| T6 — Connect and secure: posture check, ADR-028, tailnet, final validation (**Phase 0 exit**) | 🔶 in progress — awaiting console enrollment (operator) |
 
 ## Known Issues
 
 1. ~~Git identity mismatch~~ — **resolved at T3 (2026-07-11):** operator chose `Animesh Sahoo / animeshsahood6@gmail.com`; configured and verified.
 2. **`landing\` project in corpus root** — relocates to `projects\landing\` at T5 (ADR-025 §5).
-3. **Windows 10 Pro N is past end-of-support** (since 2025-10-14) — closed by T6; machine confirmed eligible on every axis.
+3. **Windows 11 deferred under [ADR-028](decisions/ADR-028.md)** — hard ceiling: migrate before **2026-10-01** or before any Phase 6 outward capability, whichever first. Compensating controls verified at T6a (2026-07-11): ESU-class security updates arriving through June 2026 (KB5094127 et al.), firewall on all profiles, Defender real-time + current signatures, browsers current (Chrome/Edge 150), no public exposure (tailnet-only, ADR-026). Eligibility already proven at T1. **Accepted risk, on the record.**
 4. **No dedicated backup drive** — D: is itself the (likely external) ORICO SSD; baseline lives cross-disk on C:. Acquire one backup drive before Phase 3 (restic offsite is mandatory then, ADR-011).
 5. **D: is exFAT** (discovered at T5) — no ownership records or NTFS ACLs. `git safe.directory` exceptions added for `D:/Fable OS` and children (baked into phase-0b.ps1 for DR). Consequence for Phase 2: ADR-020's ACTOR filesystem scoping cannot rely on NTFS ACLs *on D:* — enforce scope via the Agent Workspace / account boundary instead.
+6. **RDP listening on all interfaces (port 3389)** — flagged at T6a. Recommendation: once the tailnet is confirmed as the access path, restrict RDP to the tailnet interface or disable it. Operator decision — may be a current access path, so not changed automatically.
+7. **"RemoteServerWin" listening on 0.0.0.0:9512** (Remote Mouse–class remote-control helper) — flagged at T6a. If unused, uninstall it; if used, prefer replacing with tailnet access.
 
 ## Standing references
 

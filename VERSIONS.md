@@ -12,13 +12,14 @@
 | git | 2.54.0.windows.1 | pre-existing (winget-managed) | T3 |
 | uv | 0.11.28 (2026-07-07 build) — pre-1.0: treat upgrades as breaking until proven otherwise (ADR-014) | pre-existing | T3 |
 | gitleaks | 8.30.1 | winget (installer hash verified by winget) | T3 |
+| Tailscale (Brain) | 1.98.8 | winget (installer hash verified by winget) | T6 |
 
 ## Forward pins & notations (obligations inherited by later phases)
 
 | Phase | Item | Notation |
 |---|---|---|
-| 0 (T6) | Windows 11 | Record edition + build here at upgrade; OS-EOL check is a standing quarterly item (ADR-014) |
-| 0 (T6) | Tailscale | Pin client version at install on Brain + both consoles (ADR-026); successor: plain WireGuard |
+| infra (ADR-028) | Windows 11 | Deferred with hard ceiling 2026-10-01 / pre-Phase 6; record edition + build here at upgrade; ESU patch-pulse checked quarterly |
+| 0 (T6) | Tailscale consoles | Record tablet + phone client versions when enrolled (ADR-026); successor: plain WireGuard |
 | 1 | Ollama + models | Pin Ollama version and exact model tags (sized to 12 GB VRAM per T1 survey) at install |
 | 1 | Frontier direct adapter | Record provider + API version; **marked for deletion at Phase 2** (ADR-027) |
 | 2 | Gateway | Evaluation order Bifrost → LiteLLM (≥1.83.10 + ADR-017 controls) → superior alternative (ADR-027); pin winner here |

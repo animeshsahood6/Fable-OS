@@ -24,5 +24,6 @@ The append-only ADR ledger, continued from [DECISIONS.md](../DECISIONS.md) (ADR-
 | [ADR-025](ADR-025.md) | Physical repository mapping (implements ADR-011 on disk) | Accepted 2026-07-11 | Phase 0 T2 |
 | [ADR-026](ADR-026.md) | Distributed console architecture (Brain + stateless consoles + tailnet) | Accepted 2026-07-11 | Operator directive 2026-07-11 · Phase 0 T2 |
 | [ADR-027](ADR-027.md) | Gateway strategy: seam Day 1, software Phase 2 (supersedes-in-part ADR-017) | Accepted 2026-07-11 | Operator directive 2026-07-11 · Phase 0 T2 |
+| [ADR-028](ADR-028.md) | ADR-014 timing revised: Windows 11 deferred with hard ceiling (2026-10-01 / pre-Phase 6) | Accepted 2026-07-11 | Operator directive 2026-07-11 · Phase 0 T6 |
 
-*(Next entry: ADR-028 — new file in this directory. Never delete, never edit accepted entries.)*
+*(Next entry: ADR-029 — new file in this directory. Never delete, never edit accepted entries.)*

@@ -133,7 +133,7 @@ if ($build -ge 22000) {
 } elseif ($RequireWindows11) {
     Check "Windows 11 (build $build)" $false "complete T6: upgrade to Windows 11, then re-run with -RequireWindows11"
 } else {
-    Write-Host "  PEND  Windows 11 gate (build $build is Windows 10) - closes at T6" -ForegroundColor Yellow
+    Write-Host "  PEND  Windows 11 gate (build $build is Windows 10) - ACCEPTED under ADR-028; ceiling 2026-10-01 / pre-Phase 6" -ForegroundColor Yellow
     $pending++
 }
 
