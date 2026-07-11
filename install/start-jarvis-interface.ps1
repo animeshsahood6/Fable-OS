@@ -17,6 +17,19 @@
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" +
             [System.Environment]::GetEnvironmentVariable("Path","User")
 
+# Law 9: load NAME=value secrets so the interface (and the router it imports)
+# can authenticate to the gateway with LITELLM_MASTER_KEY (Phase 2 cutover).
+$secrets = "D:\Fable OS\config\secrets.env"
+if (Test-Path $secrets) {
+    foreach ($ln in Get-Content $secrets) {
+        $t = $ln.Trim()
+        if ($t -and -not $t.StartsWith("#") -and $t.Contains("=")) {
+            $i = $t.IndexOf("="); $name = $t.Substring(0,$i).Trim(); $val = $t.Substring($i+1)
+            if ($name -and $val) { Set-Item -Path "Env:$name" -Value $val }
+        }
+    }
+}
+
 try {
     $up = Invoke-WebRequest -Uri "http://127.0.0.1:11435/health" -UseBasicParsing -TimeoutSec 3
     if ($up.StatusCode -eq 200) { Write-Host "JARVIS interface already running."; exit 0 }

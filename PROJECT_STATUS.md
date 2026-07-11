@@ -7,9 +7,9 @@
 | Field | Value |
 |---|---|
 | **Current Phase** | **Phase 1 — COMPLETE** (2026-07-11) → entering **Phase 2 (Hands + Gateway)** |
-| **Current Task** | Phase 2 — gateway **chosen + validated alongside**; next is the router/interface **cutover** |
-| **Last Completed** | Gateway evaluation (ADR-027) done: Bifrost passed the role contract but **failed the thinking-control gate** (no clean think-off; empirically tested), so per ADR-027's fallback the gateway is **LiteLLM** (ADR-030), installed pinned under ADR-017 controls and **validated alongside** (routing works; `reasoning_effort:minimal`→237 tok clean, `high`→619 tok — thinking policy preserved; master-key auth on; 127.0.0.1 only). Working JARVIS untouched (still on direct-Ollama 11434). |
-| **Next Task** | **Cutover** (a focused pass): teach `jarvis_router.py` + `jarvis_interface.py` to call the gateway (`localhost:4000/v1`, Bearer master key, `think`→`reasoning_effort` map), repoint `models.yaml` providers, keep the direct-Ollama path as rollback, re-run `tests\phase-1.ps1`, register the gateway logon task. Design note to settle first: interface→router→gateway call topology + streaming. |
+| **Current Task** | Phase 2 — model gateway **integrated** (cutover complete & validated); next: MCP capabilities (Hands) |
+| **Last Completed** | Gateway cutover: `models.yaml` providers repointed to the LiteLLM gateway (`127.0.0.1:4000/v1`), `jarvis_router.py` + `jarvis_interface.py` now call it (Bearer master key from Law 9 store; `think`→`reasoning_effort` map); Ollama-native path retained for one-line rollback. Full chain UI→interface→gateway→Ollama validated (chat, coding auto-route, streaming, offline). Gateway added to the watchdog + given a logon task. `tests\phase-1.ps1` green. Four scheduled tasks (Gateway, Interface, UI, Watchdog). |
+| **Next Task** | Phase 2 continues — the "Hands": `config\mcp.json` against the 2026-07-28 MCP spec (ADR-019) with filesystem + browser MCP servers, vetted/pinned (ADR-018); then READER/ACTOR profiles + ACTOR sandbox (ADR-009/020), the injection canary suite (ADR-013), the successor-kernel parity job (ADR-010), and GLOSSARY.md. |
 | **Blocked By** | Nothing. |
 
 ## Completed Milestones

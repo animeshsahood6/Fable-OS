@@ -32,8 +32,9 @@ foreach ($m in @("qwen3.5:9b","qwen3.5:0.8b","qwen3-coder:30b")) {
     Check "model present: $m" ($models -match [regex]::Escape($m)) "ollama pull $m"
 }
 
-# --- 2. The single interface ---
-Write-Host "`n[2] Single JARVIS interface" -ForegroundColor Cyan
+# --- 2. The single interface + gateway ---
+Write-Host "`n[2] Single JARVIS interface + model gateway" -ForegroundColor Cyan
+try { Invoke-WebRequest "http://127.0.0.1:4000/health/liveliness" -UseBasicParsing -TimeoutSec 5 | Out-Null; Check "model gateway (LiteLLM) reachable on 4000" $true } catch { Check "model gateway (LiteLLM) reachable on 4000" $false "start-jarvis-gateway.ps1" }
 try {
     $ids = (Invoke-RestMethod "http://127.0.0.1:11435/v1/models" -TimeoutSec 5).data.id
     Check "interface exposes exactly one model" ($ids.Count -eq 1) "check jarvis_interface.py"

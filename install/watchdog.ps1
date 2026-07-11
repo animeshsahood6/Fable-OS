@@ -28,7 +28,7 @@ function Check($name, [bool]$ok, $detail) {
 }
 
 # --- Runtime vital signs -----------------------------------------------------
-foreach ($svc in @(@{n="Ollama (models)";p=11434}, @{n="JARVIS interface";p=11435}, @{n="UI adapter";p=8080})) {
+foreach ($svc in @(@{n="Ollama (models)";p=11434}, @{n="Model gateway";p=4000}, @{n="JARVIS interface";p=11435}, @{n="UI adapter";p=8080})) {
     $listening = [bool](Get-NetTCPConnection -State Listen -LocalPort $svc.p -ErrorAction SilentlyContinue)
     Check $svc.n $listening "port $($svc.p)"
 }
