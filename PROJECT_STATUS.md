@@ -7,9 +7,9 @@
 | Field | Value |
 |---|---|
 | **Current Phase** | **Phase 0 — COMPLETE** (2026-07-11) |
-| **Current Task** | Phase 1 — T4+T5 machine-side **complete**; blocked on operator device interaction (tablet/phone) |
-| **Last Completed** | T1, T2, T3B, T4 (UI adapter), **T5** (single interface `jarvis_interface.py` on 127.0.0.1:11435 — one model "JARVIS", capability-routed, OpenAI-compatible streaming; UI rewired to consume only it, raw Ollama models hidden; interface logon task registered). Three Runtime tiers listening (Ollama 11434, interface 11435, UI 8080). Doctrine skill created. T3A archived. |
-| **Next Task** | **Operator (T6):** open JARVIS on the Tab S7+ and phone via the tailnet, confirm the only model shown is "JARVIS". **Then T7 (machine-side, mine):** watchdog + `tests\phase-1.ps1` + the offline finale (operator pulls the network while chatting). |
+| **Current Task** | Phase 1 — **machine-side COMPLETE and validated** (`tests\phase-1.ps1` all green); only the operator offline-finale remains |
+| **Last Completed** | T1, T2, T3B, T4 (UI adapter), T5 (single JARVIS interface), **T6 confirmed by operator** (JARVIS default on tablet + phone over tailnet), **T7 machine-side** (watchdog every ~3h + `tests\phase-1.ps1`; Arena Model disabled so only JARVIS shows). Three tiers + three logon/periodic scheduled tasks. Doctrine skill live. T3A archived. |
+| **Next Task** | **Operator:** the offline finale — chat with JARVIS on the tablet, disconnect the Internet, confirm it keeps answering (structurally already proven; this is the human demonstration). Then Phase 1 closes and Phase 2 (gateway) begins. |
 | **Blocked By** | Nothing. |
 
 ## Completed Milestones

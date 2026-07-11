@@ -66,6 +66,7 @@ $env:ENABLE_SIGNUP       = if ($FirstRun) { "true" } else { "false" }
 $env:DEFAULT_USER_ROLE   = "pending"                # anyone who slips past waits for admin
 $env:ENABLE_COMMUNITY_SHARING = "false"
 $env:ENABLE_MESSAGE_RATING    = "false"
+$env:ENABLE_EVALUATION_ARENA_MODELS = "false"  # hide the built-in "Arena Model" so ONLY JARVIS shows
 $env:WEBUI_AUTH          = "true"
 
 New-Item -ItemType Directory -Force -Path $env:DATA_DIR | Out-Null
