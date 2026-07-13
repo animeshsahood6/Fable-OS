@@ -33,4 +33,6 @@ The append-only ADR ledger, continued from [DECISIONS.md](../DECISIONS.md) (ADR-
 
 | [ADR-034](ADR-034.md) | Voice-first surface: speech sanitization seam (Kokoro never sees Markdown), native barge-in (on_wakeword_detected + VAD conversation window), voice-state file contract + overlay voice-follow | Accepted 2026-07-13 | Operator voice-test results 2026-07-13 |
 
-*(Next entry: ADR-035 — new file in this directory. Never delete, never edit accepted entries.)*
+| [ADR-035](ADR-035.md) | The Runtime Conversation Loop (explicit states; mic muted while thinking/speaking; wake-word-only barge-in on a dedicated detector; ambient = conversation window) + the identity guarantee (scrub seam at the interface) | Accepted 2026-07-13 | Operator conversation-quality directive 2026-07-13 |
+
+*(Next entry: ADR-036 — new file in this directory. Never delete, never edit accepted entries.)*

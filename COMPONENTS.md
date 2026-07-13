@@ -64,3 +64,5 @@ Choices reflect the ecosystem as of **mid-2026**. Any future agent should re-ver
 | jarvis_presence.py | Presence probe (ADR-033): idle/lock/tailnet-reachability verdict; BLE/webcam scaffolds | `config\kernel\` |
 | jarvis_speech.py | Speech sanitization seam (ADR-034): Markdown/roleplay/reasoning-tags → TTS-ready prose; stream cleaner | `config\kernel\` |
 | jarvis_voicewatch.py | Overlay voice-follow (ADR-034): reads voice-state.json; fades, indicators, live transcript | `config\kernel\` |
+| jarvis_bargein.py | Interruption detector (ADR-035): dedicated 16 kHz stream → openWakeWord, active only while JARVIS replies | `config\kernel\` |
+| jarvis_identity.py | Identity guarantee (ADR-035): model/vendor names → JARVIS/"the Runtime", stream-safe, at the interface | `config\kernel\` |

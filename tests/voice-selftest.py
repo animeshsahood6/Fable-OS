@@ -52,17 +52,18 @@ out = sc.feed("Look:\n```py\nx=1\n```\nAll set."); out += [sc.flush()]
 check(f"SPEECH: fenced code becomes 'Code omitted.' ({out})",
       out[:2] == ["Look:", "Code omitted."] and "x=1" not in str(out))
 
-# 0b) recorder-config contract (ADR-034): wake mode arms oww + the wake-free
-# conversation window (idle_timeout_s); ambient mode carries no wake keys
+# 0b) recorder-config contract (ADR-035): wake word ALWAYS armed; the
+# conversation window is the wake-free VAD period after each listen start
 import jarvis_voice as JV
-wake_rc = JV.build_recorder_config({**JV.CFG, "wake_word": "hey_jarvis",
-                                    "ambient_mode": False, "idle_timeout_s": 300})
-amb_rc = JV.build_recorder_config({**JV.CFG, "ambient_mode": True})
-check("VOICE: wake config arms oww + conversation window (activation_delay=300)",
-      wake_rc.get("wakeword_backend") == "oww"
-      and wake_rc.get("wake_word_activation_delay") == 300.0)
-check("VOICE: ambient config carries no wake-word keys",
-      not any(k.startswith("wake") for k in amb_rc))
+rc = JV.build_recorder_config(JV.CFG)
+check("LOOP: wake word always armed + conversation window set",
+      rc.get("wakeword_backend") == "oww" and rc.get("wake_words") == "hey_jarvis"
+      and rc.get("wake_word_activation_delay")
+      == float(JV.CFG.get("conversation_window_s", 12)))
+check("LOOP: retired knobs gone; window/pause/history/min-chars present",
+      "ambient_mode" not in JV.CFG and "idle_timeout_s" not in JV.CFG
+      and all(k in JV.CFG for k in ("conversation_window_s", "post_speech_pause_s",
+                                    "history_turns", "min_command_chars")))
 
 
 # 1) TTS -> WAV
@@ -106,6 +107,20 @@ try:
     for i in range(0, len(pcm) - 1280, 1280):
         peak = max(peak, float(m.predict(pcm[i:i + 1280])["hey_jarvis"]))
     check(f"WAKE: synthesized 'hey jarvis' fires the model (peak={peak:.2f})", peak >= 0.5)
+
+    # 3c) the barge-in detector (ADR-035) triggers on the same synthesized audio
+    import jarvis_bargein as BI
+    lst = BI.InterruptListener(sensitivity=0.6)
+    for i in range(0, len(pcm) - 1280, 1280):
+        lst.feed(pcm[i:i + 1280])
+    check("BARGE: InterruptListener triggers on synthesized wake word",
+          lst.triggered.is_set())
+    lst.model.reset(); lst.triggered.clear()
+    noise = (np.random.default_rng(7).normal(0, 900, 16000 * 3)).astype(np.int16)
+    for i in range(0, len(noise) - 1280, 1280):
+        lst.feed(noise[i:i + 1280])
+    check("BARGE: InterruptListener ignores 3s of room-noise audio",
+          not lst.triggered.is_set())
 except Exception as e:
     check(f"WAKE: synthesized wake audio ({e})", False)
 
