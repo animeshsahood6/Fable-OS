@@ -64,8 +64,16 @@ try:
     got = u32.RegisterHotKey(None, 42, mods | J.MOD_NOREPEAT, ord(parts[-1].upper()))
     if got:
         u32.UnregisterHotKey(None, 42)
-    check(f"HOTKEY: '{CFG['hotkey']}' registers (fails if the overlay is already running)",
-          bool(got))
+        check(f"HOTKEY: '{CFG['hotkey']}' registers", True)
+    else:  # held by the live overlay is the healthy production state, not a failure
+        import subprocess
+        cmds = subprocess.run(
+            ["powershell", "-NoProfile", "-Command",
+             "Get-CimInstance Win32_Process -Filter \"Name='pythonw.exe'\""
+             " | ForEach-Object {$_.CommandLine}"],
+            capture_output=True, text=True, timeout=20).stdout
+        check(f"HOTKEY: '{CFG['hotkey']}' held by the RUNNING overlay",
+              "jarvis_overlay" in cmds)
 except Exception as e:
     check(f"HOTKEY: registration ({e})", False)
 
