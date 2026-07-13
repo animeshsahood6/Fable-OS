@@ -62,3 +62,5 @@ Choices reflect the ecosystem as of **mid-2026**. Any future agent should re-ver
 | jarvis_overlay.py | Glass Overlay adapter (ADR-031): hotkey-summoned translucent HUD → interface, streamed replies; `/look` verb (ADR-032) | `config\kernel\` |
 | jarvis_awareness.py | Visual Awareness probe (ADR-032): on-demand desktop snapshot, consent-gated sources, fenced output | `config\kernel\` |
 | jarvis_presence.py | Presence probe (ADR-033): idle/lock/tailnet-reachability verdict; BLE/webcam scaffolds | `config\kernel\` |
+| jarvis_speech.py | Speech sanitization seam (ADR-034): Markdown/roleplay/reasoning-tags → TTS-ready prose; stream cleaner | `config\kernel\` |
+| jarvis_voicewatch.py | Overlay voice-follow (ADR-034): reads voice-state.json; fades, indicators, live transcript | `config\kernel\` |

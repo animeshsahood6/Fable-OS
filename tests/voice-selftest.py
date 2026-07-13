@@ -13,6 +13,7 @@ import sys
 import tempfile
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+sys.path.insert(0, r"D:\Fable OS\config\kernel")
 fails = 0
 MODELS = r"D:/Fable OS/config/voice/models"
 PHRASE = "The Jarvis runtime is now online."
@@ -23,6 +24,45 @@ def check(name, ok):
     print(f"  {'PASS' if ok else 'FAIL'}  {name}")
     if not ok:
         fails += 1
+
+
+# 0) speech sanitization seam (ADR-034) - Kokoro must never see formatting
+import jarvis_speech as SP
+CASES = [
+    ("**important things**", "important things"),
+    ("*laughs*", "Haha."),
+    ("*sighs* fine.", "fine."),
+    ("# Heading\n- bullet one\n1. bullet two", "Heading bullet one bullet two"),
+    ("See [the docs](http://x) and `run()` now.", "See the docs and run() now."),
+    ("| a | b |\n|---|---|\n| 1 | 2 |", "a, b 1, 2"),
+    ("__under__ and _ital_ and *emph*", "under and ital and emph"),
+    ("> quoted wisdom", "quoted wisdom"),
+]
+bad = [(i, SP.sanitize(i), want) for i, want in CASES if SP.sanitize(i) != want]
+check(f"SPEECH: sanitize handles md/roleplay ({len(CASES)-len(bad)}/{len(CASES)})", not bad)
+for i, got, want in bad:
+    print(f"        {i!r} -> {got!r} (wanted {want!r})")
+sc = SP.Speechify()
+sents = sc.feed("Hello **wor"); sents += sc.feed("ld**. <th")
+sents += sc.feed("ink>secret stuff</think> Done."); tail = sc.flush()
+check(f"SPEECH: stream keeps sentences, drops split think-tags ({sents}+{tail!r})",
+      sents == ["Hello world.", "Done."] and tail == "" and "secret" not in str(sents))
+sc = SP.Speechify()
+out = sc.feed("Look:\n```py\nx=1\n```\nAll set."); out += [sc.flush()]
+check(f"SPEECH: fenced code becomes 'Code omitted.' ({out})",
+      out[:2] == ["Look:", "Code omitted."] and "x=1" not in str(out))
+
+# 0b) recorder-config contract (ADR-034): wake mode arms oww + the wake-free
+# conversation window (idle_timeout_s); ambient mode carries no wake keys
+import jarvis_voice as JV
+wake_rc = JV.build_recorder_config({**JV.CFG, "wake_word": "hey_jarvis",
+                                    "ambient_mode": False, "idle_timeout_s": 300})
+amb_rc = JV.build_recorder_config({**JV.CFG, "ambient_mode": True})
+check("VOICE: wake config arms oww + conversation window (activation_delay=300)",
+      wake_rc.get("wakeword_backend") == "oww"
+      and wake_rc.get("wake_word_activation_delay") == 300.0)
+check("VOICE: ambient config carries no wake-word keys",
+      not any(k.startswith("wake") for k in amb_rc))
 
 
 # 1) TTS -> WAV

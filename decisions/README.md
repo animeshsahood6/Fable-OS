@@ -31,4 +31,6 @@ The append-only ADR ledger, continued from [DECISIONS.md](../DECISIONS.md) (ADR-
 | [ADR-032](ADR-032.md) | Visual Awareness: on-demand desktop-context probe, never a monitor (6 consent-gated sources; single-glance retention; mss; MCP-wrappable later) | Accepted 2026-07-13 | Priority 3, JARVIS-feel directive |
 | [ADR-033](ADR-033.md) | Presence: on-demand probe of honest signals (idle/lock/tailnet-reachability; BLE+webcam scaffolded); consumes ADR-029's reservation by operator directive | Accepted 2026-07-13 | Priority 4, operator resume directive 2026-07-13 |
 
-*(Next entry: ADR-034 — new file in this directory. Never delete, never edit accepted entries.)*
+| [ADR-034](ADR-034.md) | Voice-first surface: speech sanitization seam (Kokoro never sees Markdown), native barge-in (on_wakeword_detected + VAD conversation window), voice-state file contract + overlay voice-follow | Accepted 2026-07-13 | Operator voice-test results 2026-07-13 |
+
+*(Next entry: ADR-035 — new file in this directory. Never delete, never edit accepted entries.)*
