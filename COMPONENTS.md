@@ -42,6 +42,7 @@ Choices reflect the ecosystem as of **mid-2026**. Any future agent should re-ver
 | Speech-to-text | **RealtimeSTT** (wraps faster-whisper + Silero/WebRTC VAD) | Streaming STT + VAD + wake-word gating in one Windows-native component (ADR-022) | whisper.cpp, Vosk (faster-whisper is the engine underneath) | Low |
 | Wake word | **openWakeWord** (`hey_jarvis` pretrained) | Free, fully offline, no key (Law 6) | Porcupine (higher quality, needs a Picovoice key) | Low — config edit |
 | Text-to-speech | **kokoro-onnx** (Kokoro-82M, Apache-2.0, onnxruntime — no torch) | ADR-022 chose Kokoro over Piper (quality; no torch); streaming synth | piper1-gpl (GPL-3; original Piper archived), XTTS | Low |
+| Desktop overlay (glass HUD) | **tkinter + ctypes** (CPython stdlib glue, ADR-031) | Zero new dependencies; translucent topmost window + global hotkey; talks only to the JARVIS interface (Convention 5) | PySide6 (if acrylic/animation wanted), Rainmeter (passive-status half) | Low — config + interface contract carry over |
 | Scheduler | **Windows Task Scheduler** | Ships with the OS (Law 10) | none needed | — |
 | Secrets | **Windows Credential Manager** + git-ignored `config\secrets.env` | Ships with the OS | KeePassXC | Low |
 | Project management | **Markdown task files** in `projects\` maintained by the kernel | Files first (Law 1) | Vikunja/Focalboard if a UI is ever truly needed | Low |
@@ -52,4 +53,7 @@ Choices reflect the ecosystem as of **mid-2026**. Any future agent should re-ver
 
 | Script | Purpose | Location |
 |---|---|---|
-| — | none yet | — |
+| jarvis_router.py | Capability classification + route resolution + gateway dispatch (Phase 1 T2 / ADR-030) | `config\kernel\` |
+| jarvis_interface.py | The Runtime's single OpenAI-compatible interface — one model "JARVIS" on 127.0.0.1:11435 (Phase 1 T5) | `config\kernel\` |
+| jarvis_voice.py | Voice adapter (ADR-022): wake word + STT → interface → streaming TTS, barge-in | `config\kernel\` |
+| jarvis_overlay.py | Glass Overlay adapter (ADR-031): hotkey-summoned translucent HUD → interface, streamed replies | `config\kernel\` |

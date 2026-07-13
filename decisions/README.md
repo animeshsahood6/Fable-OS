@@ -27,5 +27,6 @@ The append-only ADR ledger, continued from [DECISIONS.md](../DECISIONS.md) (ADR-
 | [ADR-028](ADR-028.md) | ADR-014 timing revised: Windows 11 deferred with hard ceiling (2026-10-01 / pre-Phase 6) | Accepted 2026-07-11 | Operator directive 2026-07-11 · Phase 0 T6 |
 | [ADR-029](ADR-029.md) | The JARVIS Runtime: identity and host-independence contract (final pre-Phase-1 decision; architecture frozen) | Accepted 2026-07-11 | Operator directive 2026-07-11 |
 | [ADR-030](ADR-030.md) | Model gateway = LiteLLM (ADR-027 fallback branch; Bifrost failed the thinking-control gate) under ADR-017 controls; Bifrost = named successor | Accepted 2026-07-12 | Phase 2 gateway evaluation |
+| [ADR-031](ADR-031.md) | Glass Overlay: always-on-top HUD as a replaceable L5 adapter (tkinter+ctypes stdlib glue; PySide6 = named successor) | Accepted 2026-07-12 | Priority 2, JARVIS-feel directive |
 
-*(Next entry: ADR-031 — new file in this directory. Never delete, never edit accepted entries.)*
+*(Next entry: ADR-032 — new file in this directory. Never delete, never edit accepted entries.)*

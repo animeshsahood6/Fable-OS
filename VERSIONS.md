@@ -23,6 +23,7 @@
 | Voice wake word | openwakeword 0.6.0 (pretrained `hey_jarvis`, offline, keyless) | uv pip (voice venv) | Voice (ADR-022) |
 | Voice TTS | kokoro-onnx 0.5.0 + onnxruntime 1.27.0 (Kokoro-82M, Apache-2.0) | uv pip + model files under `config\voice\models\` | Voice (ADR-022) |
 | Voice audio I/O | sounddevice 0.5.5 + soundfile 0.13.1 | uv pip (voice venv) | Voice (ADR-022) |
+| Overlay HUD | pyyaml 6.0.3 on CPython 3.12.13 (tkinter/Tk 8.6 in the stdlib — no other deps) | uv venv `config\overlay\.venv` | Overlay (ADR-031) |
 
 ## Forward pins & notations (obligations inherited by later phases)
 

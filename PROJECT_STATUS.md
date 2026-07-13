@@ -6,11 +6,11 @@
 
 | Field | Value |
 |---|---|
-| **Current Phase** | **Phase 1 — COMPLETE** (2026-07-11) → entering **Phase 2 (Hands + Gateway)** |
-| **Current Task** | **Priority 1 — Voice Runtime (ADR-022): headless-validated;** live spoken test is the operator's (physical mic/speaker) |
-| **Last Completed** | Voice adapter built (`config\kernel\jarvis_voice.py`, ≤200-line glue): openWakeWord `hey_jarvis` + RealtimeSTT → the JARVIS interface (11435) → kokoro-onnx TTS (British `bm_george`) → sounddevice, with barge-in, ambient/idle-timeout, all config-driven (`config\voice.yaml`). Local-only, providers replaceable (Law 4). **Headless suite (`tests\voice.ps1`) green**: TTS↔STT roundtrip exact, wake word loads, audio devices present, interface→TTS glue works. Runtime baseline (gateway/interface/UI/Ollama) untouched. Prior: Phase 0/1 complete, gateway integrated (ADR-030). |
-| **Next Task** | **Operator:** live spoken test — run `install\start-jarvis-voice.ps1`, say "hey jarvis", confirm it hears, replies aloud, and can be interrupted. Then (my side) register the voice logon task if desired, and proceed to Priority 2 (Glass Overlay, an L5 interface per ADR-029). Priority 5 (MCP) stays paused under ADR-019. |
-| **Blocked By** | Nothing. |
+| **Current Phase** | **Phase 2 (Hands + Gateway)** — gateway COMPLETE (ADR-030); kernel/MCP paused under ADR-019 → working the **JARVIS-feel priorities** (1 voice · 2 overlay · 3 awareness · 4 presence · 5 MCP) |
+| **Current Task** | **Priority 2 — Glass Overlay (ADR-031): COMPLETE.** Headless suite green **and** live-validated on the Brain (summon/dismiss via Ctrl+Alt+J, typed question, streamed JARVIS reply on screen). Logon task **pending operator approval** (see Next Task). Priority 1 (Voice) still awaits the operator's live spoken test. |
+| **Last Completed** | Glass Overlay built (ADR-031): `config\kernel\jarvis_overlay.py` (≤200-line stdlib glue — tkinter + ctypes, pyyaml only) + `config\overlay.yaml` + `install\start-jarvis-overlay.ps1` (+`-Console` debug mode) + `tests\overlay.ps1` **green (6/6)**: config contract, Convention-5 canary, import, glass window, hotkey, streamed interface reply. Live end-to-end verified by screenshot. `tests\phase-1.ps1` green (sole FAIL was journal freshness, cleared by this session's entry). Prior: Voice headless-validated (ADR-022); gateway cutover (ADR-030). |
+| **Next Task** | **Operator (two approvals):** (1) voice live test — run `install\start-jarvis-voice.ps1`, say "hey jarvis", confirm hear/reply/barge-in; (2) if the overlay should auto-start, approve its logon task: `schtasks /create /tn "JARVIS Glass Overlay" /tr "powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File \"D:\Fable OS\install\start-jarvis-overlay.ps1\"" /sc onlogon /rl limited /f` (voice logon task likewise after its live pass). **My side:** Priority 3 (Visual Awareness) — starts with its adoption ADR (screen sensing is T2/T3 sensor data, per ADR-031's review note). Priority 5 (MCP) stays paused under ADR-019. |
+| **Blocked By** | Operator-only validations above; nothing machine-side. |
 
 ## Completed Milestones
 
