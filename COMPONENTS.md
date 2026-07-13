@@ -43,6 +43,9 @@ Choices reflect the ecosystem as of **mid-2026**. Any future agent should re-ver
 | Wake word | **openWakeWord** (`hey_jarvis` pretrained) | Free, fully offline, no key (Law 6) | Porcupine (higher quality, needs a Picovoice key) | Low — config edit |
 | Text-to-speech | **kokoro-onnx** (Kokoro-82M, Apache-2.0, onnxruntime — no torch) | ADR-022 chose Kokoro over Piper (quality; no torch); streaming synth | piper1-gpl (GPL-3; original Piper archived), XTTS | Low |
 | Desktop overlay (glass HUD) | **tkinter + ctypes** (CPython stdlib glue, ADR-031) | Zero new dependencies; translucent topmost window + global hotkey; talks only to the JARVIS interface (Convention 5) | PySide6 (if acrylic/animation wanted), Rainmeter (passive-status half) | Low — config + interface contract carry over |
+| Screen capture (awareness) | **mss** 10.x (ADR-032) | Tiny, ctypes-only, fast full-screen PNG; the probe's only pip dep | Pillow `ImageGrab` | Trivial — one function |
+| Desktop-context sensing | **Win32 via ctypes + Shell COM** (stdlib glue, ADR-032) | Foreground/titles/clipboard/selection from the OS substrate; on-demand only, consent-gated per source | UIA tree dumps (heavier, richer) | Low |
+| Presence signals | **GetLastInputInfo + LogonUI check + tailscale CLI** (stdlib glue, ADR-033) | Honest, locally-validatable signals; reachability ≠ proximity by contract | **bleak** (BLE proximity, at adoption); webcam (hard consent-gated, needs vision route) | Low — probe swap only |
 | Scheduler | **Windows Task Scheduler** | Ships with the OS (Law 10) | none needed | — |
 | Secrets | **Windows Credential Manager** + git-ignored `config\secrets.env` | Ships with the OS | KeePassXC | Low |
 | Project management | **Markdown task files** in `projects\` maintained by the kernel | Files first (Law 1) | Vikunja/Focalboard if a UI is ever truly needed | Low |
@@ -56,4 +59,6 @@ Choices reflect the ecosystem as of **mid-2026**. Any future agent should re-ver
 | jarvis_router.py | Capability classification + route resolution + gateway dispatch (Phase 1 T2 / ADR-030) | `config\kernel\` |
 | jarvis_interface.py | The Runtime's single OpenAI-compatible interface — one model "JARVIS" on 127.0.0.1:11435 (Phase 1 T5) | `config\kernel\` |
 | jarvis_voice.py | Voice adapter (ADR-022): wake word + STT → interface → streaming TTS, barge-in | `config\kernel\` |
-| jarvis_overlay.py | Glass Overlay adapter (ADR-031): hotkey-summoned translucent HUD → interface, streamed replies | `config\kernel\` |
+| jarvis_overlay.py | Glass Overlay adapter (ADR-031): hotkey-summoned translucent HUD → interface, streamed replies; `/look` verb (ADR-032) | `config\kernel\` |
+| jarvis_awareness.py | Visual Awareness probe (ADR-032): on-demand desktop snapshot, consent-gated sources, fenced output | `config\kernel\` |
+| jarvis_presence.py | Presence probe (ADR-033): idle/lock/tailnet-reachability verdict; BLE/webcam scaffolds | `config\kernel\` |

@@ -24,6 +24,8 @@
 | Voice TTS | kokoro-onnx 0.5.0 + onnxruntime 1.27.0 (Kokoro-82M, Apache-2.0) | uv pip + model files under `config\voice\models\` | Voice (ADR-022) |
 | Voice audio I/O | sounddevice 0.5.5 + soundfile 0.13.1 | uv pip (voice venv) | Voice (ADR-022) |
 | Overlay HUD | pyyaml 6.0.3 on CPython 3.12.13 (tkinter/Tk 8.6 in the stdlib — no other deps) | uv venv `config\overlay\.venv` | Overlay (ADR-031) |
+| Awareness probe | mss 10.2.0 + pyyaml 6.0.3 on CPython 3.12.13 | uv venv `config\awareness\.venv` | Awareness (ADR-032) |
+| Presence probe | pyyaml 6.0.3 on CPython 3.12.13 (stdlib + tailscale CLI otherwise) | uv venv `config\presence\.venv` | Presence (ADR-033) |
 
 ## Forward pins & notations (obligations inherited by later phases)
 

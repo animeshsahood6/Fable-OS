@@ -28,5 +28,7 @@ The append-only ADR ledger, continued from [DECISIONS.md](../DECISIONS.md) (ADR-
 | [ADR-029](ADR-029.md) | The JARVIS Runtime: identity and host-independence contract (final pre-Phase-1 decision; architecture frozen) | Accepted 2026-07-11 | Operator directive 2026-07-11 |
 | [ADR-030](ADR-030.md) | Model gateway = LiteLLM (ADR-027 fallback branch; Bifrost failed the thinking-control gate) under ADR-017 controls; Bifrost = named successor | Accepted 2026-07-12 | Phase 2 gateway evaluation |
 | [ADR-031](ADR-031.md) | Glass Overlay: always-on-top HUD as a replaceable L5 adapter (tkinter+ctypes stdlib glue; PySide6 = named successor) | Accepted 2026-07-12 | Priority 2, JARVIS-feel directive |
+| [ADR-032](ADR-032.md) | Visual Awareness: on-demand desktop-context probe, never a monitor (6 consent-gated sources; single-glance retention; mss; MCP-wrappable later) | Accepted 2026-07-13 | Priority 3, JARVIS-feel directive |
+| [ADR-033](ADR-033.md) | Presence: on-demand probe of honest signals (idle/lock/tailnet-reachability; BLE+webcam scaffolded); consumes ADR-029's reservation by operator directive | Accepted 2026-07-13 | Priority 4, operator resume directive 2026-07-13 |
 
-*(Next entry: ADR-032 — new file in this directory. Never delete, never edit accepted entries.)*
+*(Next entry: ADR-034 — new file in this directory. Never delete, never edit accepted entries.)*
