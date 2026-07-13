@@ -53,6 +53,22 @@ try:
 except Exception as e:
     check(f"WAKE: openWakeWord 'hey_jarvis' loads ({e})", False)
 
+# 3b) wake word FIRES on synthesized "hey jarvis" - the strongest wake diagnosis
+# possible without a live mic (TTS audio -> resample to oww's 16 kHz int16 frames)
+try:
+    import numpy as np
+    ws, wsr = k.create("Hey, Jarvis!", voice="bm_george", speed=1.0, lang="en-us")
+    t = np.arange(0, len(ws) / wsr, 1 / 16000.0)
+    s16 = np.interp(t, np.arange(len(ws)) / wsr, ws)
+    pcm = (np.clip(s16, -1, 1) * 32767).astype(np.int16)
+    pcm = np.concatenate([np.zeros(16000, np.int16), pcm, np.zeros(8000, np.int16)])
+    peak = 0.0
+    for i in range(0, len(pcm) - 1280, 1280):
+        peak = max(peak, float(m.predict(pcm[i:i + 1280])["hey_jarvis"]))
+    check(f"WAKE: synthesized 'hey jarvis' fires the model (peak={peak:.2f})", peak >= 0.5)
+except Exception as e:
+    check(f"WAKE: synthesized wake audio ({e})", False)
+
 # 4) audio devices visible
 import sounddevice as sd
 ins = [d for d in sd.query_devices() if d["max_input_channels"] > 0]
